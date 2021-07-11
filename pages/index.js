@@ -1,6 +1,7 @@
 import Head from "next/head";
 import {useRouter} from 'next/router'
 import { getMovies, getNewReleases, getPopularMovies } from "../helpers/api-util";
+import Link from 'next/link'
 
 export default function Home({ newReleases, popularMovies, topRatedMovies }) {
 
@@ -22,8 +23,11 @@ export default function Home({ newReleases, popularMovies, topRatedMovies }) {
       <section className="">
       <ul>
         {newReleases.map(movie => (
-          <li key={movie.id} onClick={()=>handleClick(movie.id)}>
+          <li key={movie.id}>
+            <Link href={`/${movie.id}`}>
             <img src={`https://image.tmdb.org/t/p/w154/${movie.poster_path}`} alt="" />
+          </Link>
+          
           </li>
         ))}
       </ul>
