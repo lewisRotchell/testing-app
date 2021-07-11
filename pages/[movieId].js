@@ -16,16 +16,19 @@ const MovieDetailPage = ({selectedMovie}) => {
 export async function getStaticProps(context) {
     const movieId = context.params.movieId;
   
-    const movie = await getMovieById(movieId);
+    const res =
+    await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-GB
+`);
+
+const movie = await res.json()
   
 
   
     return {
       props: {
         selectedMovie: movie,
- 
       },
-      revalidate: 1800,
+      
     };
   }
 
