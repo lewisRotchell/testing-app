@@ -1,6 +1,6 @@
 import Head from "next/head";
 import {useRouter} from 'next/router'
-import { getMovies } from "../helpers/api-util";
+import { getMovies, getNewReleases, getPopularMovies } from "../helpers/api-util";
 
 export default function Home({ newReleases, popularMovies, topRatedMovies }) {
 
@@ -33,13 +33,13 @@ export default function Home({ newReleases, popularMovies, topRatedMovies }) {
 }
 
 export async function getStaticProps() {
-  const data = await getMovies();
+  const data = await getNewReleases();
 
   return {
     props: {
-      newReleases: data[0].results,
-      popularMovies: data[1].results,
-      topRatedMovies: data[2].results,
+
+      newReleases: data.results,
+     
     },
   };
 }

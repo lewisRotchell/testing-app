@@ -1,5 +1,5 @@
 import React from 'react'
-import {getMovies, getMovieById} from '../helpers/api-util'
+import {getMovies, getMovieById, getNewReleases} from '../helpers/api-util'
 
 const MovieDetailPage = ({selectedMovie}) => {
 
@@ -30,23 +30,22 @@ export async function getStaticProps(context) {
   }
 
   export async function getStaticPaths() {
-    const movies = await getMovies();
+
+
+    const movies = await getNewReleases()
+
   
- 
+console.log(movies);
   
-    const bigMovieArray = [
-      ...movies[0].results,
-      ...movies[1].results,
-      ...movies[2].results,
-    ];
-  
-    const paths = bigMovieArray.map((movie) => ({
+    const paths = movies.results.map((movie) => ({
       params: { movieId: movie.id.toString() },
     }));
+
+    
   
     return {
-      paths,
-      fallback: "blocking",
+     paths,
+      fallback: false,
     };
   }
 
