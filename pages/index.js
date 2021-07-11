@@ -33,12 +33,13 @@ export default function Home({ newReleases, popularMovies, topRatedMovies }) {
 }
 
 export async function getStaticProps() {
-  const data = await getNewReleases();
+  const res = await getNewReleases();
+  const movies = await  res.json()
 
   return {
     props: {
 
-      newReleases: data.results,
+      newReleases: movies.results,
      
     },
   };

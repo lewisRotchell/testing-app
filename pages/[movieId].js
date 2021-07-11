@@ -32,10 +32,10 @@ export async function getStaticProps(context) {
   export async function getStaticPaths() {
 
 
-    const movies = await getNewReleases()
+    const res = await getNewReleases()
+    const movies = await res.json() 
 
-  
-console.log(movies);
+
   
     const paths = movies.results.map((movie) => ({
       params: { movieId: movie.id.toString() },
